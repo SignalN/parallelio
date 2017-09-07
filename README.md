@@ -31,7 +31,7 @@ a_b = pread("a.txt", "b.txt")
 ```
 It returns an iterator over tuples of corresponding lines.
 
-## papply
+### papply
 `papply` applies a function to the items in the iterator.
 ```
 c = papply(magic_fn, a_b)
@@ -46,7 +46,7 @@ pwrite(c, "c.txt")
 ```
 It expects an iterator of values, and writes out one value per line.  It returns only the path to the newly written file.
 
-## pinsert
+### pinsert
 `pinsert` turns one line into multiple lines.
 ```
 c = pinsert(insert_fn, c)
@@ -55,7 +55,7 @@ c = pinsert(insert_fn, c)
 
 `pinsert` returns a new iterator.
 
-## pfilter
+### pfilter
 `pfilter` is a way to remove certain lines.
 ```
 c = pfilter(fn, c)
