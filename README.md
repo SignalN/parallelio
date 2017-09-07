@@ -8,7 +8,7 @@ Parallel data files are two or more files that have the same number of lines, li
 
 With Parallel I/O, data from the same row across multiple files can be read as input to functions, and the output of the functions can be written to new files.
 
-It is especially intended for text data, for which formats like CSV and TSV are not ideal.
+It is especially intended for text data at scale, for which formats like CSV and TSV are not ideal.
 
 ```
 pip install parallelio
@@ -18,7 +18,7 @@ pip install parallelio
 from parallelio.parallelio import pread, papply, pwrite
 
 a_b = pread("a.txt", "b.txt")
-c = papply(magic_fn, a_b)
+c = papply(your_magic_fn, a_b)
 pwrite(c, "c.txt")
 ```
 
@@ -77,3 +77,40 @@ If `path` is an extension, it will add it to the common prefix.  For example, if
 ## Keyword arguments
 
 `pinsert`, `papply`, `pfilter` and `pio` support keyword arguments that will be passed on to the functions `fn`.
+
+## Example
+
+a.txt:
+```
+Aleppo
+Bellinzona
+Chicago
+Detroit
+```
+
+b.txt:
+```
+Alla
+Boban
+Charles
+Dino
+```
+
+Your code:
+```
+
+def your_magic_fn(a, b):
+  return a + ' ' + b
+
+a_b = pread("a.txt", "b.txt")
+c = papply(your_magic_fn, a_b)
+pwrite(c, "c.txt")
+```
+
+Once it runs, c.txt will be written with:
+```
+Aleppo Alla
+Bellinzona Boban
+Chicago Charles
+Detroit Dino
+```
