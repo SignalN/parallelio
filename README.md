@@ -15,7 +15,7 @@ pip install parallelio
 ```
 
 ```
-from parallelio import pread, papply, pwrite
+from parallelio.parallelio import pread, papply, pwrite
 
 a_b = pread("a.txt", "b.txt")
 c = papply(magic_fn, a_b)
